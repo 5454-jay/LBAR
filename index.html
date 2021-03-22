@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- <script src='https://aframe.io/releases/1.0.2/aframe.min.js'></script> -->
+<!-- <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script> -->
+<!-- model-viewer -->
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+
+<!-- <script type="module" src="../node_modules/react-viro/components/Utilities/ViroUtils.js"></script> -->
+<!-- A-Frame -->
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+<!-- zoom effect  -->
+<script src="./gesture-detector.js"></script>
+<script src="./gesture-handler.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./style.css"/>
+<script src="./script.js"  ></script>
+<!-- <script> import { model } from "./script.js/" </script> -->
+
+
+</head>
+<body>
+    
+<div class="header">
+  <h1>ARCore Project</h1>
+</div>
+
+<center>
+  <h1 id='try'></h1>
+<div class="row clearfix">
+    <div class="col-6 col-s-9">
+    <model-viewer 
+    id="model-viewer" 
+    src="./assets/glTF/Duck.gltf"
+    ios-src="./assets/human_model.usdz"
+    ar 
+    auto-rotate
+    unstable-webxr
+    ar-scale="auto" 
+   
+    camera-controls alt="A 3D model of an astronaut" >
+      <button slot="ar-button" id="ar-button">
+        View in your space
+      </button>
+    <div id="error" class="hide">AR is not supported on this device</div>
+    
+    </model-viewer>
+
+    <!-- <model-viewer id="model-viewer" src="./assets/Chair.glb" 
+    ar  
+    ar-scale="auto" 
+    camera-controls
+    unstable-webxr 
+    alt="A 3D model of an astronaut" 
+    >
+      <div id="error" class="hide">AR is not supported on this device</div>
+    </model-viewer> -->
+
+    <div id ="arcore" class="arsupported" style="visibility: visible;">
+      AR is not supported
+    </div>
+    <div id="button" class="col-9 col-s-12 menu">
+      <ul>
+        <li><a href="./marker_based/marker_based_ar.html"> Try Marker Based </a></li>
+        <li><a href="./location_based/lb.html"> Try Location Based</a></li>   
+      </ul>
+    </div>
+
+</div>
+</center>
+
+        <!-- <div class="col-6 col-s-3" >
+        <img src="1.png" width="390" height="300" class="center">
+        <h3>Scane this QR Code </h3>
+        
+          <p>Scanning this QR from your mobile. <br> Then redirect it to the given marker you will see your model.</p>
+        </div>
+        <div class="col-6 col-s-9">
+        <img src="1.png" width="390" height="300" class="center">
+        <h3>This is Marker</h3>
+          <p>Model will appear hear. </p>
+        </div> -->
+       
+
+<div class="footer">
+  <p> </p>
+</div>
+
+</body>
+
+</html>

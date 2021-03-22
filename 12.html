@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <p>Click the button to display a time-based greeting:</p>
+
+    <button onclick="myFunction()">Try it</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+
+
+            if ('xr' in navigator) {
+
+                navigator.xr.isSessionSupported('immersive-ar').then(function (supported) {
+                    if (supported){
+                        greeting = "AR Supported";
+                    }
+                    else {
+                        greeting = "AR NOT Supported";
+                        }
+                })
+            }
+            else {
+
+                const message = document.createElement('a');
+
+                if (window.isSecureContext === false) {
+                    greeting = "WEBXR NEEDS HTTPS";
+                } else {
+                    greeting ='WEBXR NOT AVAILABLE';
+
+                }
+
+            }
+//             var hour = new Date().getHours(); 
+  var greeting;
+//             if (hour < 18) {
+//                 greeting = "Good day";
+//             } else {
+//                 greeting = "Good evening";
+//             }
+            document.getElementById("demo").innerHTML = greeting;
+        }
+    </script>
+
+</body>
+
+</html>
