@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>LBAR</title>
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script> -->
+    <script src="../gesture-detector.js"></script>
+    <script src="../gesture-handler.js"></script>
+   
+
+</head>
+<body>
+    <a-scene
+      arjs
+      embedded
+      renderer="logarithmicDepthBuffer: true;"
+      vr-mode-ui="enabled: false"
+      gesture-detector
+      id="scene"
+    >
+    <!-- <script>
+        console.log(gesture-detector)
+    </script> -->
+    <!-- <a-assets>
+        <a-asset-item
+          id="bowser"
+          src="./glTF/Duck.gltf"
+        >
+        </a-asset-item>
+      </a-assets> -->
+      <script>
+        window.onload = () => {
+        
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(staticLoadPlaces);
+            console.log('Geolocation API supported by this browser.');
+            // console.log(geolocation);
+        } else { 
+            console.log('Geolocation API not supported by this browser.');
+              }
+        };
+        function staticLoadPlaces(position) {
+            let model  = document.getElementById('bowser-model');
+            model.setAttribute('gps-entity-place', `latitude: ${ position.coords.latitude - 0.001}; longitude: ${position.coords.longitude + 0.001};`);
+            // model.setAttribute('gps-entity-place', `latitude: 21.163818; longitude: 72.81708609999999;`);
+            // renderPlaces(position.coords.latitude, position.coords.longitude);
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+            // console.log(model);
+
+// canvas text
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            ctx.font = "18px Arial";
+            ctx.fillText(position.coords.latitude,10,50);
+            ctx.fillText(position.coords.longitude,10,80);
+            return [
+                {
+                    name: 'Pokèmon',
+                    location: {
+                        // decomment the following and add coordinates:
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    },
+                },
+            ];
+        }
+
+    
+            // AFRAME.registerCompoent('loader', {
+            //     init: function() {
+            //         let loader = document.querySelector("#loadingEl")
+            //         this.el.addEventListener('model-loaded', e => {
+            //         console.log('loaded')
+            //         loader.setAttribute("visible", "false")
+            //         })
+            //     }
+            //     })
+
+            </script>
+    <a-entity 
+        id="bowser-model"
+        camera look-controls
+        look-at="[gps-camera]"
+        gps-entity-place=""
+        gltf-model="../assets/glTF/Duck.gltf" 
+        position="10 0 0 "
+        scale="1 1 1"
+     
+        gesture-handler
+     
+    ></a-entity>
+    <a-camera
+        gps-camera ="minDistance: 50; maxDistance: 700;"
+        rotation-reader
+    ></a-camera>
+
+</a-scene>
+<style>
+    .centered {
+    height: 20%;
+    justify-content: center;
+    position: fixed;
+    bottom: 0%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0px auto;
+    left: 0;
+    right: 0;
+}
+
+</style>
+<div class="centered">
+    <canvas id="myCanvas"  width="200" height="100" style="border:1px solid #ffffff;"></canvas><div className="ArCanvas"></div>
+</div>
+</body>
+</html>

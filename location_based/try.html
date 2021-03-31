@@ -1,0 +1,79 @@
+<!-- <!doctype html>
+<html>
+
+<head>
+  <link rel="canonical" href="https://inspiredlabs.github.io/ar.js/markerless.html" />
+
+  <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script src="../gesture-detector.js"></script>
+<script src="../gesture-handler.js"></script>
+  <script>
+    const log = console.log;
+    window.onload = () => {
+      let scene = document.querySelector('a-scene'); /* Apply to whole scene */
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          let gps = document.createAttribute('gps-entity-place'),
+            arjs = document.createAttribute('arjs'),
+            welcome = document.getElementById('welcome');
+
+          arjs.value = 'sourceType: webcam; sourceWidth: 1280; sourceHeight: 960; trackingMethod: best; debugUIEnabled: false;';
+          gps.value = `latitude: ${position.coords.latitude - 0.001}; longitude: ${position.coords.longitude + 0.001}`;
+          log(gps.value);
+          scene.setAttributeNode(gps); /* Apply to whole scene */
+          scene.setAttributeNode(arjs);
+          console.log(welcome);
+        });
+      }
+
+    };
+  </script>
+</head>
+<a-scene vr-mode-ui="enabled: false">
+  <a-entity id="wrapper"
+  camera look-controls
+  look-at="[gps-camera]"
+
+  gltf-model="../assets/Chair.glb" 
+  scale="1 1 1"
+  position="-30 0 -150"
+  gesture-handler
+  >
+
+    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+    <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+    <a-plane position="-30 0 -150" rotation="-90 0 0" width="7" height="7" color="#7BC8A4" shadow></a-plane>
+   
+ 
+    
+    <a-text id="welcome" value="Welcome" scale="75 75 75" color="#000000" position="-30 0 -150"></a-text>
+   
+
+  </a-entity>
+
+  <a-camera camera="fov: 60;" gps-camera rotation-reader></a-camera>
+</a-scene>
+</body>
+</html> -->
+<html>
+    <head>
+        <title>AR.js Basic Projected Camera Example</title>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+        <!-- Look-at component. We don't need this now, but we will later. -->
+        <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    </head>
+    <body>
+    <a-scene
+        vr-mode-ui="enabled: false"
+        arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false;'
+        renderer='antialias: true; alpha: true'>
+            <a-camera gps-projected-camera rotation-reader></a-camera>
+            <a-box gps-projected-entity-place='latitude: 21.170404799999996; longitude: 72.844264' material='color: red' scale='10 10 10'></a-box>
+        </a-scene>
+    </body>
+</html>
